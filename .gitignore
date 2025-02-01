@@ -9,8 +9,6 @@ venv/
 data/raw_data.json
 data/images/
 
-#credentials
-data_collection/config.py
 
 # Logs
 *.log
@@ -26,3 +24,4 @@ env/
 data/
 main.py
 session_name.session
+.env
