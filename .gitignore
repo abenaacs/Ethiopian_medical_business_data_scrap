@@ -1,0 +1,28 @@
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Data files
+data/raw_data.json
+data/images/
+
+#credentials
+data_collection/config.py
+
+# Logs
+*.log
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+env/
+data/
+main.py
+session_name.session

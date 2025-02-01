@@ -1,0 +1,9 @@
+telethon
+pandas
+sqlalchemy
+dbt
+fastapi
+uvicorn
+torch
+torchvision
+opencv-python
