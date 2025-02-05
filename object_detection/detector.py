@@ -2,9 +2,6 @@ import os
 import torch
 import logging
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Configure Logger
 logging.basicConfig(
@@ -42,8 +39,8 @@ class ObjectDetector:
 
 if __name__ == "__main__":
     detector = ObjectDetector(
-        model_weights=os.getenv("YOLO_MODEL_PATH"),
-        image_dir=os.getenv("IMAGE_DIR"),
-        output_dir=os.getenv("DETECTION_OUTPUT_DIR"),
+        model_weights="object_detection/yolov5/best.pt",
+        image_dir="data/images/",
+        output_dir="data/detections/",
     )
     detector.detect_objects()

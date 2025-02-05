@@ -1,4 +1,3 @@
-import unittest
 from fastapi.testclient import TestClient
 from api.main import app
 from sqlalchemy import create_engine

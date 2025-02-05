@@ -22,6 +22,5 @@ dist/
 build/
 env/
 data/
-main.py
 session_name.session
 .env
