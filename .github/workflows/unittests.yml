@@ -1,6 +1,7 @@
 name: Run Unit Tests
 
 on:
+  # Trigger the workflow on push or pull request to the main branch
   push:
     branches:
       - main
@@ -11,19 +12,41 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Check out the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
+          python-version: "3.9" # Specify the Python version
 
-      - name: Install dependencies
+      # Step 3: Install dependencies
+      - name: Install project dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install -r object_detection/yolov5/requirements.txt  # Install YOLO-specific dependencies
 
-      - name: Run tests
-        run: pytest tests/
+      # Step 4: Run unit tests
+      - name: Run unit tests
+        run: |
+          pytest tests/ --verbose  # Run all tests in the `tests/` directory
+
+      # Step 5: Generate test coverage report (optional)
+      - name: Generate test coverage report
+        run: |
+          pip install pytest-cov
+          pytest tests/ --cov=api --cov=data_collection --cov=data_cleaning --cov=object_detection --cov-report=xml
+        if: always() # Ensure this step runs even if previous steps fail
+
+      # Step 6: Upload coverage report to GitHub (optional)
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Optional: Add a Codecov token for coverage tracking
+          files: ./coverage.xml
+        if: always() # Ensure this step runs even if previous steps fail
